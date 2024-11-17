@@ -389,9 +389,12 @@ public class SceneScriptManager {
 
     // TODO optimize
     public SceneGroup getGroupById(int groupId) {
+        if(!this.isInit) return null;
+
         for (var block : getBlocks().values()) {
             this.getScene().loadBlock(block);
 
+            if(block.groups == null) continue;
             var group = block.groups.get(groupId);
             if (group == null) {
                 continue;
@@ -666,7 +669,17 @@ public class SceneScriptManager {
         this.sceneGroups.remove(group.id);
         this.sceneGroupsInstances.values().stream()
                 .filter(i -> i.getLuaGroup().equals(group))
-                .forEach(s -> s.setCached(true));
+                .forEach(s -> {
+                    if(group.isDynamic_load()) {
+                        // Reset the dynamic group on unregistering
+                        s.setTargetSuiteId(0);
+                        s.setActiveSuiteId(0);
+                        s.getDeadEntities().clear();
+                        s.getCachedGadgetStates().clear();
+                        s.getCachedVariables().clear();
+                    }
+                    s.setCached(true);
+                });
         this.sceneGroupsInstances.values().removeIf(i -> i.getLuaGroup().equals(group));
     }
 
@@ -728,9 +741,10 @@ public class SceneScriptManager {
                         m -> {
                             var entity = scene.getEntityByConfigId(m.config_id, group.id);
                             return (entity == null || entity.getGroupId() != group.id)
-                                    && (!m.isOneoff
-                                            || !m.persistent
-                                            || !groupInstance.getDeadEntities().contains(m.config_id));
+                                    && !(((m.isOneoff
+                                            && m.persistent)
+                                            || group.isDynamic_load())
+                                            && groupInstance.getDeadEntities().contains(m.config_id));
                         })
                 .map(g -> createGadget(group.id, group.block_id, g, groupInstance.getCachedGadgetState(g)))
                 .filter(Objects::nonNull)
@@ -748,7 +762,7 @@ public class SceneScriptManager {
                             return (entity == null
                                     || entity.getGroupId()
                                             != group
-                                                    .id); /*&& !groupInstance.getDeadEntities().contains(entity); */ // TODO:
+                                                    .id) && !(group.isDynamic_load() && groupInstance.getDeadEntities().contains(m.config_id)); // TODO:
                             // Investigate the usage of deadEntities
                         }) // TODO: Add persistent monster cached data
                 .map(mob -> createMonster(group.id, group.block_id, mob))

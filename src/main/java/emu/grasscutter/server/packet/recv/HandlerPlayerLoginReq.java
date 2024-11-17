@@ -38,32 +38,32 @@ public class HandlerPlayerLoginReq extends PacketHandler {
         // Show opening cutscene if player has no avatars
         if (player.getAvatars().getAvatarCount() == 0) {
             // Pick character (Disabled due to opcode issue)
-            // session.setState(SessionState.PICKING_CHARACTER);
-            // session.send(new BasePacket(PacketOpcodes.DoSetPlayerBornDataNotify));
+            session.setState(SessionState.PICKING_CHARACTER);
+            session.send(new BasePacket(PacketOpcodes.DoSetPlayerBornDataNotify));
 
             // Hardcode default mc and nickname
-            int avatarId = 10000007;
-            Avatar mainCharacter = new Avatar(avatarId);
+            // int avatarId = 10000007;
+            // Avatar mainCharacter = new Avatar(avatarId);
 
-            // Check if the default Anemo skill should be given.
-            if (!GAME_OPTIONS.questing.enabled) {
-                mainCharacter.setSkillDepotData(
-                    GameData.getAvatarSkillDepotDataMap().get(704));
-            }
+            // // Check if the default Anemo skill should be given.
+            // if (!GAME_OPTIONS.questing.enabled) {
+            //     mainCharacter.setSkillDepotData(
+            //         GameData.getAvatarSkillDepotDataMap().get(704));
+            // }
 
-            // Manually handle adding to team
-            player.addAvatar(mainCharacter, false);
-            player.setMainCharacterId(avatarId);
-            player.setHeadImage(avatarId);
-            player
-                .getTeamManager()
-                .getCurrentSinglePlayerTeamInfo()
-                .getAvatars()
-                .add(mainCharacter.getAvatarId());
-            player.save(); // TODO save player team in different object
+            // // Manually handle adding to team
+            // player.addAvatar(mainCharacter, false);
+            // player.setMainCharacterId(avatarId);
+            // player.setHeadImage(avatarId);
+            // player
+            //     .getTeamManager()
+            //     .getCurrentSinglePlayerTeamInfo()
+            //     .getAvatars()
+            //     .add(mainCharacter.getAvatarId());
+            // player.save(); // TODO save player team in different object
 
-            // Login done
-            session.getPlayer().onLogin();
+            // // Login done
+            // session.getPlayer().onLogin();
         } else {
             // Login done
             session.getPlayer().onLogin();

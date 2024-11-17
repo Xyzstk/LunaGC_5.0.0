@@ -19,27 +19,51 @@ public final class DailyTaskDataNotifyOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>bool is_taken_score_reward = 11;</code>
-     * @return The isTakenScoreReward.
+     * <code>uint32 finished_num = 1;</code>
+     * @return The finishedNum.
      */
-    boolean getIsTakenScoreReward();
+    int getFinishedNum();
 
     /**
-     * <code>uint32 score_reward_id = 3;</code>
+     * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+     */
+    java.util.List<emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair> 
+        getAHMCJEJKFAOList();
+    /**
+     * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+     */
+    emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair getAHMCJEJKFAO(int index);
+    /**
+     * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+     */
+    int getAHMCJEJKFAOCount();
+    /**
+     * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+     */
+    java.util.List<? extends emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32PairOrBuilder> 
+        getAHMCJEJKFAOOrBuilderList();
+    /**
+     * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+     */
+    emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32PairOrBuilder getAHMCJEJKFAOOrBuilder(
+        int index);
+
+    /**
+     * <code>uint32 score_reward_id = 13;</code>
      * @return The scoreRewardId.
      */
     int getScoreRewardId();
 
     /**
-     * <code>uint32 finished_num = 13;</code>
-     * @return The finishedNum.
+     * <code>bool is_taken_score_reward = 15;</code>
+     * @return The isTakenScoreReward.
      */
-    int getFinishedNum();
+    boolean getIsTakenScoreReward();
   }
   /**
    * <pre>
-   * CmdId: 9714
-   * Obf: FAAFPGCGNCF
+   * CmdId: 8698
+   * Obf: OACKKHPGFDM
    * </pre>
    *
    * Protobuf type {@code DailyTaskDataNotify}
@@ -54,6 +78,7 @@ public final class DailyTaskDataNotifyOuterClass {
       super(builder);
     }
     private DailyTaskDataNotify() {
+      aHMCJEJKFAO_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -76,6 +101,7 @@ public final class DailyTaskDataNotifyOuterClass {
       if (extensionRegistry == null) {
         throw new java.lang.NullPointerException();
       }
+      int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -86,19 +112,28 @@ public final class DailyTaskDataNotifyOuterClass {
             case 0:
               done = true;
               break;
-            case 24: {
+            case 8: {
 
-              scoreRewardId_ = input.readUInt32();
+              finishedNum_ = input.readUInt32();
               break;
             }
-            case 88: {
-
-              isTakenScoreReward_ = input.readBool();
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                aHMCJEJKFAO_ = new java.util.ArrayList<emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              aHMCJEJKFAO_.add(
+                  input.readMessage(emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair.parser(), extensionRegistry));
               break;
             }
             case 104: {
 
-              finishedNum_ = input.readUInt32();
+              scoreRewardId_ = input.readUInt32();
+              break;
+            }
+            case 120: {
+
+              isTakenScoreReward_ = input.readBool();
               break;
             }
             default: {
@@ -116,6 +151,9 @@ public final class DailyTaskDataNotifyOuterClass {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
+          aHMCJEJKFAO_ = java.util.Collections.unmodifiableList(aHMCJEJKFAO_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -133,21 +171,61 @@ public final class DailyTaskDataNotifyOuterClass {
               emu.grasscutter.net.proto.DailyTaskDataNotifyOuterClass.DailyTaskDataNotify.class, emu.grasscutter.net.proto.DailyTaskDataNotifyOuterClass.DailyTaskDataNotify.Builder.class);
     }
 
-    public static final int IS_TAKEN_SCORE_REWARD_FIELD_NUMBER = 11;
-    private boolean isTakenScoreReward_;
+    public static final int FINISHED_NUM_FIELD_NUMBER = 1;
+    private int finishedNum_;
     /**
-     * <code>bool is_taken_score_reward = 11;</code>
-     * @return The isTakenScoreReward.
+     * <code>uint32 finished_num = 1;</code>
+     * @return The finishedNum.
      */
     @java.lang.Override
-    public boolean getIsTakenScoreReward() {
-      return isTakenScoreReward_;
+    public int getFinishedNum() {
+      return finishedNum_;
     }
 
-    public static final int SCORE_REWARD_ID_FIELD_NUMBER = 3;
+    public static final int AHMCJEJKFAO_FIELD_NUMBER = 5;
+    private java.util.List<emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair> aHMCJEJKFAO_;
+    /**
+     * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+     */
+    @java.lang.Override
+    public java.util.List<emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair> getAHMCJEJKFAOList() {
+      return aHMCJEJKFAO_;
+    }
+    /**
+     * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32PairOrBuilder> 
+        getAHMCJEJKFAOOrBuilderList() {
+      return aHMCJEJKFAO_;
+    }
+    /**
+     * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+     */
+    @java.lang.Override
+    public int getAHMCJEJKFAOCount() {
+      return aHMCJEJKFAO_.size();
+    }
+    /**
+     * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+     */
+    @java.lang.Override
+    public emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair getAHMCJEJKFAO(int index) {
+      return aHMCJEJKFAO_.get(index);
+    }
+    /**
+     * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+     */
+    @java.lang.Override
+    public emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32PairOrBuilder getAHMCJEJKFAOOrBuilder(
+        int index) {
+      return aHMCJEJKFAO_.get(index);
+    }
+
+    public static final int SCORE_REWARD_ID_FIELD_NUMBER = 13;
     private int scoreRewardId_;
     /**
-     * <code>uint32 score_reward_id = 3;</code>
+     * <code>uint32 score_reward_id = 13;</code>
      * @return The scoreRewardId.
      */
     @java.lang.Override
@@ -155,15 +233,15 @@ public final class DailyTaskDataNotifyOuterClass {
       return scoreRewardId_;
     }
 
-    public static final int FINISHED_NUM_FIELD_NUMBER = 13;
-    private int finishedNum_;
+    public static final int IS_TAKEN_SCORE_REWARD_FIELD_NUMBER = 15;
+    private boolean isTakenScoreReward_;
     /**
-     * <code>uint32 finished_num = 13;</code>
-     * @return The finishedNum.
+     * <code>bool is_taken_score_reward = 15;</code>
+     * @return The isTakenScoreReward.
      */
     @java.lang.Override
-    public int getFinishedNum() {
-      return finishedNum_;
+    public boolean getIsTakenScoreReward() {
+      return isTakenScoreReward_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -180,14 +258,17 @@ public final class DailyTaskDataNotifyOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (finishedNum_ != 0) {
+        output.writeUInt32(1, finishedNum_);
+      }
+      for (int i = 0; i < aHMCJEJKFAO_.size(); i++) {
+        output.writeMessage(5, aHMCJEJKFAO_.get(i));
+      }
       if (scoreRewardId_ != 0) {
-        output.writeUInt32(3, scoreRewardId_);
+        output.writeUInt32(13, scoreRewardId_);
       }
       if (isTakenScoreReward_ != false) {
-        output.writeBool(11, isTakenScoreReward_);
-      }
-      if (finishedNum_ != 0) {
-        output.writeUInt32(13, finishedNum_);
+        output.writeBool(15, isTakenScoreReward_);
       }
       unknownFields.writeTo(output);
     }
@@ -198,17 +279,21 @@ public final class DailyTaskDataNotifyOuterClass {
       if (size != -1) return size;
 
       size = 0;
+      if (finishedNum_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, finishedNum_);
+      }
+      for (int i = 0; i < aHMCJEJKFAO_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, aHMCJEJKFAO_.get(i));
+      }
       if (scoreRewardId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(3, scoreRewardId_);
+          .computeUInt32Size(13, scoreRewardId_);
       }
       if (isTakenScoreReward_ != false) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(11, isTakenScoreReward_);
-      }
-      if (finishedNum_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(13, finishedNum_);
+          .computeBoolSize(15, isTakenScoreReward_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -225,12 +310,14 @@ public final class DailyTaskDataNotifyOuterClass {
       }
       emu.grasscutter.net.proto.DailyTaskDataNotifyOuterClass.DailyTaskDataNotify other = (emu.grasscutter.net.proto.DailyTaskDataNotifyOuterClass.DailyTaskDataNotify) obj;
 
-      if (getIsTakenScoreReward()
-          != other.getIsTakenScoreReward()) return false;
-      if (getScoreRewardId()
-          != other.getScoreRewardId()) return false;
       if (getFinishedNum()
           != other.getFinishedNum()) return false;
+      if (!getAHMCJEJKFAOList()
+          .equals(other.getAHMCJEJKFAOList())) return false;
+      if (getScoreRewardId()
+          != other.getScoreRewardId()) return false;
+      if (getIsTakenScoreReward()
+          != other.getIsTakenScoreReward()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -242,13 +329,17 @@ public final class DailyTaskDataNotifyOuterClass {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + FINISHED_NUM_FIELD_NUMBER;
+      hash = (53 * hash) + getFinishedNum();
+      if (getAHMCJEJKFAOCount() > 0) {
+        hash = (37 * hash) + AHMCJEJKFAO_FIELD_NUMBER;
+        hash = (53 * hash) + getAHMCJEJKFAOList().hashCode();
+      }
+      hash = (37 * hash) + SCORE_REWARD_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getScoreRewardId();
       hash = (37 * hash) + IS_TAKEN_SCORE_REWARD_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getIsTakenScoreReward());
-      hash = (37 * hash) + SCORE_REWARD_ID_FIELD_NUMBER;
-      hash = (53 * hash) + getScoreRewardId();
-      hash = (37 * hash) + FINISHED_NUM_FIELD_NUMBER;
-      hash = (53 * hash) + getFinishedNum();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -346,8 +437,8 @@ public final class DailyTaskDataNotifyOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 9714
-     * Obf: FAAFPGCGNCF
+     * CmdId: 8698
+     * Obf: OACKKHPGFDM
      * </pre>
      *
      * Protobuf type {@code DailyTaskDataNotify}
@@ -382,16 +473,23 @@ public final class DailyTaskDataNotifyOuterClass {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
+          getAHMCJEJKFAOFieldBuilder();
         }
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        isTakenScoreReward_ = false;
+        finishedNum_ = 0;
 
+        if (aHMCJEJKFAOBuilder_ == null) {
+          aHMCJEJKFAO_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          aHMCJEJKFAOBuilder_.clear();
+        }
         scoreRewardId_ = 0;
 
-        finishedNum_ = 0;
+        isTakenScoreReward_ = false;
 
         return this;
       }
@@ -419,9 +517,19 @@ public final class DailyTaskDataNotifyOuterClass {
       @java.lang.Override
       public emu.grasscutter.net.proto.DailyTaskDataNotifyOuterClass.DailyTaskDataNotify buildPartial() {
         emu.grasscutter.net.proto.DailyTaskDataNotifyOuterClass.DailyTaskDataNotify result = new emu.grasscutter.net.proto.DailyTaskDataNotifyOuterClass.DailyTaskDataNotify(this);
-        result.isTakenScoreReward_ = isTakenScoreReward_;
-        result.scoreRewardId_ = scoreRewardId_;
+        int from_bitField0_ = bitField0_;
         result.finishedNum_ = finishedNum_;
+        if (aHMCJEJKFAOBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) != 0)) {
+            aHMCJEJKFAO_ = java.util.Collections.unmodifiableList(aHMCJEJKFAO_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.aHMCJEJKFAO_ = aHMCJEJKFAO_;
+        } else {
+          result.aHMCJEJKFAO_ = aHMCJEJKFAOBuilder_.build();
+        }
+        result.scoreRewardId_ = scoreRewardId_;
+        result.isTakenScoreReward_ = isTakenScoreReward_;
         onBuilt();
         return result;
       }
@@ -470,14 +578,40 @@ public final class DailyTaskDataNotifyOuterClass {
 
       public Builder mergeFrom(emu.grasscutter.net.proto.DailyTaskDataNotifyOuterClass.DailyTaskDataNotify other) {
         if (other == emu.grasscutter.net.proto.DailyTaskDataNotifyOuterClass.DailyTaskDataNotify.getDefaultInstance()) return this;
-        if (other.getIsTakenScoreReward() != false) {
-          setIsTakenScoreReward(other.getIsTakenScoreReward());
+        if (other.getFinishedNum() != 0) {
+          setFinishedNum(other.getFinishedNum());
+        }
+        if (aHMCJEJKFAOBuilder_ == null) {
+          if (!other.aHMCJEJKFAO_.isEmpty()) {
+            if (aHMCJEJKFAO_.isEmpty()) {
+              aHMCJEJKFAO_ = other.aHMCJEJKFAO_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureAHMCJEJKFAOIsMutable();
+              aHMCJEJKFAO_.addAll(other.aHMCJEJKFAO_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.aHMCJEJKFAO_.isEmpty()) {
+            if (aHMCJEJKFAOBuilder_.isEmpty()) {
+              aHMCJEJKFAOBuilder_.dispose();
+              aHMCJEJKFAOBuilder_ = null;
+              aHMCJEJKFAO_ = other.aHMCJEJKFAO_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              aHMCJEJKFAOBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getAHMCJEJKFAOFieldBuilder() : null;
+            } else {
+              aHMCJEJKFAOBuilder_.addAllMessages(other.aHMCJEJKFAO_);
+            }
+          }
         }
         if (other.getScoreRewardId() != 0) {
           setScoreRewardId(other.getScoreRewardId());
         }
-        if (other.getFinishedNum() != 0) {
-          setFinishedNum(other.getFinishedNum());
+        if (other.getIsTakenScoreReward() != false) {
+          setIsTakenScoreReward(other.getIsTakenScoreReward());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -507,72 +641,11 @@ public final class DailyTaskDataNotifyOuterClass {
         }
         return this;
       }
-
-      private boolean isTakenScoreReward_ ;
-      /**
-       * <code>bool is_taken_score_reward = 11;</code>
-       * @return The isTakenScoreReward.
-       */
-      @java.lang.Override
-      public boolean getIsTakenScoreReward() {
-        return isTakenScoreReward_;
-      }
-      /**
-       * <code>bool is_taken_score_reward = 11;</code>
-       * @param value The isTakenScoreReward to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIsTakenScoreReward(boolean value) {
-        
-        isTakenScoreReward_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>bool is_taken_score_reward = 11;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearIsTakenScoreReward() {
-        
-        isTakenScoreReward_ = false;
-        onChanged();
-        return this;
-      }
-
-      private int scoreRewardId_ ;
-      /**
-       * <code>uint32 score_reward_id = 3;</code>
-       * @return The scoreRewardId.
-       */
-      @java.lang.Override
-      public int getScoreRewardId() {
-        return scoreRewardId_;
-      }
-      /**
-       * <code>uint32 score_reward_id = 3;</code>
-       * @param value The scoreRewardId to set.
-       * @return This builder for chaining.
-       */
-      public Builder setScoreRewardId(int value) {
-        
-        scoreRewardId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 score_reward_id = 3;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearScoreRewardId() {
-        
-        scoreRewardId_ = 0;
-        onChanged();
-        return this;
-      }
+      private int bitField0_;
 
       private int finishedNum_ ;
       /**
-       * <code>uint32 finished_num = 13;</code>
+       * <code>uint32 finished_num = 1;</code>
        * @return The finishedNum.
        */
       @java.lang.Override
@@ -580,7 +653,7 @@ public final class DailyTaskDataNotifyOuterClass {
         return finishedNum_;
       }
       /**
-       * <code>uint32 finished_num = 13;</code>
+       * <code>uint32 finished_num = 1;</code>
        * @param value The finishedNum to set.
        * @return This builder for chaining.
        */
@@ -591,12 +664,314 @@ public final class DailyTaskDataNotifyOuterClass {
         return this;
       }
       /**
-       * <code>uint32 finished_num = 13;</code>
+       * <code>uint32 finished_num = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearFinishedNum() {
         
         finishedNum_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair> aHMCJEJKFAO_ =
+        java.util.Collections.emptyList();
+      private void ensureAHMCJEJKFAOIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          aHMCJEJKFAO_ = new java.util.ArrayList<emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair>(aHMCJEJKFAO_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair, emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair.Builder, emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32PairOrBuilder> aHMCJEJKFAOBuilder_;
+
+      /**
+       * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+       */
+      public java.util.List<emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair> getAHMCJEJKFAOList() {
+        if (aHMCJEJKFAOBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(aHMCJEJKFAO_);
+        } else {
+          return aHMCJEJKFAOBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+       */
+      public int getAHMCJEJKFAOCount() {
+        if (aHMCJEJKFAOBuilder_ == null) {
+          return aHMCJEJKFAO_.size();
+        } else {
+          return aHMCJEJKFAOBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+       */
+      public emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair getAHMCJEJKFAO(int index) {
+        if (aHMCJEJKFAOBuilder_ == null) {
+          return aHMCJEJKFAO_.get(index);
+        } else {
+          return aHMCJEJKFAOBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+       */
+      public Builder setAHMCJEJKFAO(
+          int index, emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair value) {
+        if (aHMCJEJKFAOBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAHMCJEJKFAOIsMutable();
+          aHMCJEJKFAO_.set(index, value);
+          onChanged();
+        } else {
+          aHMCJEJKFAOBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+       */
+      public Builder setAHMCJEJKFAO(
+          int index, emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair.Builder builderForValue) {
+        if (aHMCJEJKFAOBuilder_ == null) {
+          ensureAHMCJEJKFAOIsMutable();
+          aHMCJEJKFAO_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          aHMCJEJKFAOBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+       */
+      public Builder addAHMCJEJKFAO(emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair value) {
+        if (aHMCJEJKFAOBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAHMCJEJKFAOIsMutable();
+          aHMCJEJKFAO_.add(value);
+          onChanged();
+        } else {
+          aHMCJEJKFAOBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+       */
+      public Builder addAHMCJEJKFAO(
+          int index, emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair value) {
+        if (aHMCJEJKFAOBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAHMCJEJKFAOIsMutable();
+          aHMCJEJKFAO_.add(index, value);
+          onChanged();
+        } else {
+          aHMCJEJKFAOBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+       */
+      public Builder addAHMCJEJKFAO(
+          emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair.Builder builderForValue) {
+        if (aHMCJEJKFAOBuilder_ == null) {
+          ensureAHMCJEJKFAOIsMutable();
+          aHMCJEJKFAO_.add(builderForValue.build());
+          onChanged();
+        } else {
+          aHMCJEJKFAOBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+       */
+      public Builder addAHMCJEJKFAO(
+          int index, emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair.Builder builderForValue) {
+        if (aHMCJEJKFAOBuilder_ == null) {
+          ensureAHMCJEJKFAOIsMutable();
+          aHMCJEJKFAO_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          aHMCJEJKFAOBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+       */
+      public Builder addAllAHMCJEJKFAO(
+          java.lang.Iterable<? extends emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair> values) {
+        if (aHMCJEJKFAOBuilder_ == null) {
+          ensureAHMCJEJKFAOIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, aHMCJEJKFAO_);
+          onChanged();
+        } else {
+          aHMCJEJKFAOBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+       */
+      public Builder clearAHMCJEJKFAO() {
+        if (aHMCJEJKFAOBuilder_ == null) {
+          aHMCJEJKFAO_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          aHMCJEJKFAOBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+       */
+      public Builder removeAHMCJEJKFAO(int index) {
+        if (aHMCJEJKFAOBuilder_ == null) {
+          ensureAHMCJEJKFAOIsMutable();
+          aHMCJEJKFAO_.remove(index);
+          onChanged();
+        } else {
+          aHMCJEJKFAOBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+       */
+      public emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair.Builder getAHMCJEJKFAOBuilder(
+          int index) {
+        return getAHMCJEJKFAOFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+       */
+      public emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32PairOrBuilder getAHMCJEJKFAOOrBuilder(
+          int index) {
+        if (aHMCJEJKFAOBuilder_ == null) {
+          return aHMCJEJKFAO_.get(index);  } else {
+          return aHMCJEJKFAOBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+       */
+      public java.util.List<? extends emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32PairOrBuilder> 
+           getAHMCJEJKFAOOrBuilderList() {
+        if (aHMCJEJKFAOBuilder_ != null) {
+          return aHMCJEJKFAOBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(aHMCJEJKFAO_);
+        }
+      }
+      /**
+       * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+       */
+      public emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair.Builder addAHMCJEJKFAOBuilder() {
+        return getAHMCJEJKFAOFieldBuilder().addBuilder(
+            emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+       */
+      public emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair.Builder addAHMCJEJKFAOBuilder(
+          int index) {
+        return getAHMCJEJKFAOFieldBuilder().addBuilder(
+            index, emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Uint32Pair AHMCJEJKFAO = 5;</code>
+       */
+      public java.util.List<emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair.Builder> 
+           getAHMCJEJKFAOBuilderList() {
+        return getAHMCJEJKFAOFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair, emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair.Builder, emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32PairOrBuilder> 
+          getAHMCJEJKFAOFieldBuilder() {
+        if (aHMCJEJKFAOBuilder_ == null) {
+          aHMCJEJKFAOBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair, emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32Pair.Builder, emu.grasscutter.net.proto.Uint32PairOuterClass.Uint32PairOrBuilder>(
+                  aHMCJEJKFAO_,
+                  ((bitField0_ & 0x00000001) != 0),
+                  getParentForChildren(),
+                  isClean());
+          aHMCJEJKFAO_ = null;
+        }
+        return aHMCJEJKFAOBuilder_;
+      }
+
+      private int scoreRewardId_ ;
+      /**
+       * <code>uint32 score_reward_id = 13;</code>
+       * @return The scoreRewardId.
+       */
+      @java.lang.Override
+      public int getScoreRewardId() {
+        return scoreRewardId_;
+      }
+      /**
+       * <code>uint32 score_reward_id = 13;</code>
+       * @param value The scoreRewardId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setScoreRewardId(int value) {
+        
+        scoreRewardId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 score_reward_id = 13;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearScoreRewardId() {
+        
+        scoreRewardId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private boolean isTakenScoreReward_ ;
+      /**
+       * <code>bool is_taken_score_reward = 15;</code>
+       * @return The isTakenScoreReward.
+       */
+      @java.lang.Override
+      public boolean getIsTakenScoreReward() {
+        return isTakenScoreReward_;
+      }
+      /**
+       * <code>bool is_taken_score_reward = 15;</code>
+       * @param value The isTakenScoreReward to set.
+       * @return This builder for chaining.
+       */
+      public Builder setIsTakenScoreReward(boolean value) {
+        
+        isTakenScoreReward_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool is_taken_score_reward = 15;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearIsTakenScoreReward() {
+        
+        isTakenScoreReward_ = false;
         onChanged();
         return this;
       }
@@ -667,22 +1042,25 @@ public final class DailyTaskDataNotifyOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\031DailyTaskDataNotify.proto\"c\n\023DailyTask" +
-      "DataNotify\022\035\n\025is_taken_score_reward\030\013 \001(" +
-      "\010\022\027\n\017score_reward_id\030\003 \001(\r\022\024\n\014finished_n" +
-      "um\030\r \001(\rB\033\n\031emu.grasscutter.net.protob\006p" +
-      "roto3"
+      "\n\031DailyTaskDataNotify.proto\032\020Uint32Pair." +
+      "proto\"\205\001\n\023DailyTaskDataNotify\022\024\n\014finishe" +
+      "d_num\030\001 \001(\r\022 \n\013AHMCJEJKFAO\030\005 \003(\0132\013.Uint3" +
+      "2Pair\022\027\n\017score_reward_id\030\r \001(\r\022\035\n\025is_tak" +
+      "en_score_reward\030\017 \001(\010B\033\n\031emu.grasscutter" +
+      ".net.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          emu.grasscutter.net.proto.Uint32PairOuterClass.getDescriptor(),
         });
     internal_static_DailyTaskDataNotify_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_DailyTaskDataNotify_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DailyTaskDataNotify_descriptor,
-        new java.lang.String[] { "IsTakenScoreReward", "ScoreRewardId", "FinishedNum", });
+        new java.lang.String[] { "FinishedNum", "AHMCJEJKFAO", "ScoreRewardId", "IsTakenScoreReward", });
+    emu.grasscutter.net.proto.Uint32PairOuterClass.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

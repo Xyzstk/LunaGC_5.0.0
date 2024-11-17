@@ -20,6 +20,8 @@ public class QuestData extends GameResource {
     @Getter private int order;
     @Getter private long descTextMapHash;
 
+    @Getter private QuestShowType showType;
+
     @Getter private boolean finishParent;
     @Getter private boolean isRewind;
 
@@ -37,6 +39,7 @@ public class QuestData extends GameResource {
 
     @Getter private List<Integer> trialAvatarList;
     @Getter private List<ItemParamData> gainItems;
+    @Getter private List<Integer> exclusiveNpcList;
 
     public static String questConditionKey(
             @Nonnull Enum<?> type, int firstParam, @Nullable String paramsStr) {

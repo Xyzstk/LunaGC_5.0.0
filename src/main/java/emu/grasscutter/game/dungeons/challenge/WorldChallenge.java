@@ -1,6 +1,7 @@
 package emu.grasscutter.game.dungeons.challenge;
 
 import emu.grasscutter.Grasscutter;
+import emu.grasscutter.game.dailytask.enums.DailyTaskFinishType;
 import emu.grasscutter.game.dungeons.challenge.trigger.ChallengeTrigger;
 import emu.grasscutter.game.dungeons.enums.DungeonPassConditionType;
 import emu.grasscutter.game.entity.*;
@@ -149,6 +150,12 @@ public class WorldChallenge {
 
         // Despawn all leftover mobs in this challenge's SceneGroup
         getScene().getScriptManager().removeMonstersInGroup(group);
+        
+        this.getScene().getHost().getDailyTaskManager().triggerEvent(
+                DailyTaskFinishType.DAILY_FINISH_CHALLENGE,
+                this.getGroup().id,
+                this.getChallengeId(),
+                success ? 1 : 0);
 
         getScene().broadcastPacket(new PacketDungeonChallengeFinishNotify(this));
     }

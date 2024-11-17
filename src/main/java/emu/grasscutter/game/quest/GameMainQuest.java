@@ -31,8 +31,8 @@ public class GameMainQuest {
     @Getter private int parentQuestId;
     @Getter private int[] questVars;
     @Getter private long[] timeVar;
-    @Getter private ParentQuestState state;
-    @Getter private boolean isFinished;
+    @Getter @Setter private ParentQuestState state;
+    @Getter @Setter private boolean isFinished;
     @Getter List<QuestGroupSuite> questGroupSuites;
 
     @Getter int[] suggestTrackMainQuestList;
@@ -85,6 +85,8 @@ public class GameMainQuest {
     public void setOwner(Player player) {
         if (player.getUid() != this.getOwnerUid()) return;
         this.owner = player;
+
+        if(this.questManager == null) this.questManager = player.getQuestManager();
     }
 
     public int getQuestVar(int i) {
@@ -198,7 +200,23 @@ public class GameMainQuest {
     // TODO
     public void fail() {}
 
-    public void cancel() {}
+    public void cancel() {
+        if(this.state == ParentQuestState.PARENT_QUEST_STATE_CANCELED) return;
+
+        this.state = ParentQuestState.PARENT_QUEST_STATE_CANCELED;
+
+        // reset progress
+        this.questVars = new int[] {0, 0, 0, 0, 0};
+        this.timeVar = new long[] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+        this.questGroupSuites.clear();
+        this.getChildQuests().values().forEach(q -> q.clearProgress(true));
+
+        // mark as finished
+        this.isFinished = true;
+        this.getOwner().getSession().send(new PacketFinishedParentQuestUpdateNotify(this));
+
+        this.save();
+    }
 
     public List<Position> rewindTo(GameQuest targetQuest, boolean notifyDelete) {
         if (targetQuest == null || !targetQuest.rewind(notifyDelete)) {

@@ -17,6 +17,7 @@ import emu.grasscutter.net.proto.VisionTypeOuterClass.VisionType;
 import emu.grasscutter.scripts.constants.*;
 import emu.grasscutter.scripts.data.*;
 import emu.grasscutter.server.packet.send.*;
+import emu.grasscutter.utils.Utils;
 import io.netty.util.concurrent.FastThreadLocal;
 import lombok.val;
 import org.luaj.vm2.*;
@@ -1697,15 +1698,56 @@ public class ScriptLib {
 
     // TODO: ShowReminderByUid
 
-    public int ShowReminderRadius(int var1, LuaTable var2, int var3) {
-        logger.warn("[LUA] Call unimplemented ShowReminderRadius with {} {} {}", var1, printTable(var2), var3);
-        // TODO implement var2 is a postion
+    public int ShowReminderRadius(int reminderId, LuaTable pos, int radius) {
+        logger.debug("[LUA] Call ShowReminderRadius with {} {} {}", reminderId, printTable(pos), radius);
+        var x = pos.get("x");
+        var y = pos.get("y");
+        var z = pos.get("z");
+        if (!x.isnumber() || !y.isnumber() || !z.isnumber()) {
+            return 1;
+        }
+
+        var targetPos = new Position(x.toint(), y.toint(), z.toint());
+        getSceneScriptManager().getScene().getPlayers().forEach(p -> {
+            if(Utils.getDist(targetPos, p.getPosition()) < radius) {
+                p.sendPacket(new PacketDungeonShowReminderNotify(reminderId));
+            }
+        });
         return 0;
     }
 
     // TODO: ShowTemplateReminder
     // TODO: SkipTeyvatTime
-    // TODO: StartChallenge
+
+    public int StartChallenge(int localChallengeId, int challengeDataId, int[] challengeParams) {
+        logger.debug("[LUA] Call StartChallenge with {} {} {}", localChallengeId, challengeDataId, challengeParams);
+        
+        var scene = getSceneScriptManager().getScene();
+        var existingChallenge = scene.getChallenge();
+        if (existingChallenge != null && existingChallenge.inProgress()) {
+            logger.warn("StartChallenge: tried to create challenge while one is already in progress");
+            return 1;
+        }
+
+        var challenge = ChallengeFactory.getChallenge(
+                localChallengeId,
+                challengeDataId,
+                challengeParams[0],
+                challengeParams[1],
+                challengeParams[2],
+                challengeParams[3],
+                scene,
+                getCurrentGroup().get()
+        );
+
+        if (challenge == null) {
+            return 1;
+        }
+
+        scene.setChallenge(challenge);
+        challenge.start();
+        return 0;
+    }
 
     public int StartFatherChallenge(int var1) {
         logger.warn("[LUA] Call unimplemented StartFatherChallenge with {}", var1);
@@ -1744,9 +1786,28 @@ public class ScriptLib {
         return 0;
     }
 
-    public int StopChallenge(int var1, int var2) {
-        logger.warn("[LUA] Call unimplemented StopChallenge with {} {}", var1, var2);
-        // TODO implement
+    public int StopChallenge(int localChallengeId, int success) {
+        logger.debug("[LUA] Call StopChallenge with {} {}", localChallengeId, success);
+
+        var scene = getSceneScriptManager().getScene();
+        var challenge = scene.getChallenge();
+
+        if(challenge == null || !challenge.inProgress()) {
+            logger.warn("StopChallenge: trying to stop a challenge while there is no challenge in progress");
+            return 1;
+        }
+
+        if(challenge.getChallengeIndex() != localChallengeId) {
+            logger.warn("StopChallenge: challenge does not exist");
+            return 1;
+        }
+
+        if(success == 1) {
+            challenge.done();
+        } else {
+            challenge.fail();
+        }
+
         return 0;
     }
 

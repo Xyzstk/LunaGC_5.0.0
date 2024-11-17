@@ -81,7 +81,7 @@ public final class PlayerProgressManager extends BasePlayerDataManager {
         player.getSession().send(new PacketOpenStateUpdateNotify(this.player));
 
         // Add statue quests if necessary.
-        this.addStatueQuestsOnLogin();
+        // this.addStatueQuestsOnLogin();
 
         if (!GAME_OPTIONS.questing.enabled) {
             // Auto-unlock the first statue and map area.

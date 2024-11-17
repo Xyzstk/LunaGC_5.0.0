@@ -5,6 +5,7 @@ import static emu.grasscutter.game.quest.enums.QuestContent.*;
 
 import emu.grasscutter.data.GameData;
 import emu.grasscutter.data.binout.MainQuestData.TalkData;
+import emu.grasscutter.game.dailytask.DailyTaskManager;
 import emu.grasscutter.game.player.*;
 import emu.grasscutter.server.event.player.PlayerNpcTalkEvent;
 import lombok.NonNull;
@@ -51,6 +52,8 @@ public final class TalkManager extends BasePlayerManager {
         questManager.queueEvent(QUEST_CONTENT_COMPLETE_ANY_TALK, talkId);
         questManager.queueEvent(QUEST_CONTENT_COMPLETE_TALK, talkId);
         questManager.queueEvent(QUEST_COND_COMPLETE_TALK, talkId);
+
+        player.getDailyTaskManager().onFinishTalk(talkId);
     }
 
     public void saveTalkToQuest(int talkId, int mainQuestId) {

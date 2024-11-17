@@ -26,8 +26,8 @@ public final class DailyTaskScoreRewardNotifyOuterClass {
   }
   /**
    * <pre>
-   * CmdId: 20810
-   * Obf: LDEAEOMCCOP
+   * CmdId: 7806
+   * Obf: FCLHNCBOEGJ
    * </pre>
    *
    * Protobuf type {@code DailyTaskScoreRewardNotify}
@@ -279,8 +279,8 @@ public final class DailyTaskScoreRewardNotifyOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 20810
-     * Obf: LDEAEOMCCOP
+     * CmdId: 7806
+     * Obf: FCLHNCBOEGJ
      * </pre>
      *
      * Protobuf type {@code DailyTaskScoreRewardNotify}

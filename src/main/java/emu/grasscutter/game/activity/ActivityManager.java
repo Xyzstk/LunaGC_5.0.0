@@ -128,7 +128,7 @@ public class ActivityManager extends BasePlayerManager {
                                 params));
     }
 
-    public boolean isActivityActive(int activityId) {
+    public static boolean isActivityActive(int activityId) {
         var activityConfig = activityConfigItemMap.get(activityId);
         if (activityConfig == null) {
             return false;
@@ -138,7 +138,7 @@ public class ActivityManager extends BasePlayerManager {
         return now.after(activityConfig.getBeginTime()) && now.before(activityConfig.getEndTime());
     }
 
-    public boolean hasActivityEnded(int activityId) {
+    public static boolean hasActivityEnded(int activityId) {
         var activityConfig = activityConfigItemMap.get(activityId);
         if (activityConfig == null) {
             return true;
@@ -147,7 +147,7 @@ public class ActivityManager extends BasePlayerManager {
         return new Date().after(activityConfig.getEndTime());
     }
 
-    public boolean isActivityOpen(int activityId) {
+    public static boolean isActivityOpen(int activityId) {
         var activityConfig = activityConfigItemMap.get(activityId);
         if (activityConfig == null) {
             return false;
@@ -157,7 +157,17 @@ public class ActivityManager extends BasePlayerManager {
         return now.after(activityConfig.getOpenTime()) && now.before(activityConfig.getCloseTime());
     }
 
-    public int getOpenDay(int activityId) {
+    public static boolean isActivityTypeOpen(int activityType) {
+        for(var activity : activityConfigItemMap.values()) {
+            if(activity.getActivityType() == activityType && isActivityOpen(activity.getActivityId())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static int getOpenDay(int activityId) {
         var activityConfig = activityConfigItemMap.get(activityId);
         if (activityConfig == null) {
             return 0;
@@ -170,7 +180,7 @@ public class ActivityManager extends BasePlayerManager {
                 + 1;
     }
 
-    public boolean isActivityClosed(int activityId) {
+    public static boolean isActivityClosed(int activityId) {
         var activityConfig = activityConfigItemMap.get(activityId);
         if (activityConfig == null) {
             return false;

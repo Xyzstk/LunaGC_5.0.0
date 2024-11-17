@@ -3,6 +3,7 @@ package emu.grasscutter.game.entity;
 import static emu.grasscutter.scripts.constants.EventType.EVENT_SPECIFIC_GADGET_HP_CHANGE;
 
 import emu.grasscutter.data.binout.config.ConfigEntityGadget;
+import emu.grasscutter.game.dailytask.enums.DailyTaskFinishType;
 import emu.grasscutter.game.props.FightProperty;
 import emu.grasscutter.game.quest.enums.QuestContent;
 import emu.grasscutter.game.world.*;
@@ -54,6 +55,10 @@ public abstract class EntityBaseGadget extends GameEntity {
                         p ->
                                 p.getQuestManager()
                                         .queueEvent(QuestContent.QUEST_CONTENT_DESTROY_GADGET, this.getGadgetId()));
+        
+        var dailyTaskManager = getScene().getHost().getDailyTaskManager();
+        dailyTaskManager.triggerEvent(DailyTaskFinishType.DAILY_FINISH_GADGET_ID_NUM, this.getGroupId(), this.getGadgetId());
+        dailyTaskManager.triggerEvent(DailyTaskFinishType.DAILY_FINISH_GADGET_CONFIG_NUM, this.getGroupId(), this.getConfigId());
     }
 
     @Override

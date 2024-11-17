@@ -13,6 +13,7 @@ import emu.grasscutter.game.activity.ActivityManager;
 import emu.grasscutter.game.avatar.*;
 import emu.grasscutter.game.battlepass.BattlePassManager;
 import emu.grasscutter.game.city.CityInfoData;
+import emu.grasscutter.game.dailytask.DailyTaskManager;
 import emu.grasscutter.game.entity.GameEntity;
 import emu.grasscutter.game.expedition.ExpeditionInfo;
 import emu.grasscutter.game.friends.*;
@@ -28,7 +29,7 @@ import emu.grasscutter.game.managers.forging.*;
 import emu.grasscutter.game.managers.mapmark.*;
 import emu.grasscutter.game.managers.stamina.StaminaManager;
 import emu.grasscutter.game.props.*;
-import emu.grasscutter.game.quest.QuestManager;
+import emu.grasscutter.game.quest.*;
 import emu.grasscutter.game.quest.enums.*;
 import emu.grasscutter.game.shop.ShopLimit;
 import emu.grasscutter.game.talk.TalkManager;
@@ -115,6 +116,7 @@ public class Player implements PlayerHook, FieldFetch {
     @Getter private List<ActiveForgeData> activeForges;
     @Getter private Map<Integer, ActiveCookCompoundData> activeCookCompounds;
     @Getter private Map<Integer, Integer> questGlobalVariables;
+    @Getter private Map<Integer, Integer[]> dailyTaskVariables;
     @Getter private Map<Integer, Integer> openStates;
     @Getter private Map<Integer, Set<Integer>> sceneTags;
     @Getter @Setter private Map<Integer, Set<Integer>> unlockedSceneAreas;
@@ -161,6 +163,7 @@ public class Player implements PlayerHook, FieldFetch {
 
     // Manager data (Save-able to the database)
     @Getter private transient Achievements achievements;
+    @Getter private transient DailyTaskManager dailyTaskManager;
     private PlayerProfile playerProfile;  // Getter has null-check
     @Getter private TeamManager teamManager;
     private TowerData towerData;  // Getter has null-check
@@ -245,6 +248,7 @@ public class Player implements PlayerHook, FieldFetch {
         this.activeForges = new ArrayList<>();
         this.unlockedRecipies = new HashMap<>();
         this.questGlobalVariables = new HashMap<>();
+        this.dailyTaskVariables = new HashMap<>();
         this.openStates = new HashMap<>();
         this.sceneTags = new HashMap<>();
         this.unlockedSceneAreas = new HashMap<>();
@@ -1325,6 +1329,9 @@ public class Player implements PlayerHook, FieldFetch {
             this.getBattlePassManager().resetWeeklyMissions();
         }
 
+        // Reset daily tasks.
+        this.getDailyTaskManager().resetDailyTasks();
+
         // Reset resin-buying count.
         this.setResinBuyCount(0);
 
@@ -1363,6 +1370,7 @@ public class Player implements PlayerHook, FieldFetch {
         // Load from db
         var runner = Grasscutter.getThreadPool();
         runner.submit(() -> this.achievements = Achievements.getByPlayer(this));
+        runner.submit(() -> this.dailyTaskManager = DailyTaskManager.getByPlayer(this));
 
         runner.submit(this.getAvatars()::loadFromDatabase);
         runner.submit(this.getInventory()::loadFromDatabase);
@@ -1449,6 +1457,7 @@ public class Player implements PlayerHook, FieldFetch {
         this.resinManager.onPlayerLogin();
         this.cookingManager.sendCookDataNotify();
         this.cookingCompoundManager.onPlayerLogin();
+        this.dailyTaskManager.onPlayerLogin();
         this.teamManager.onPlayerLogin();
 
         getTodayMoonCard(); // The timer works at 0:0, some users log in after that, use this method to check if they have received a reward today or not. If not, send the reward.

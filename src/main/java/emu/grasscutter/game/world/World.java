@@ -220,6 +220,9 @@ public class World implements Iterable<Player> {
         if (this.getPlayers().size() > 1) {
             this.updatePlayerInfos(player);
         }
+        
+        // Request daily task data from world owner
+        this.getHost().getDailyTaskManager().requestDailyTaskData(player);
     }
 
     public synchronized void addPlayer(Player player, int newSceneId) {
@@ -272,6 +275,9 @@ public class World implements Iterable<Player> {
         if (this.getPlayers().size() > 1) {
             this.updatePlayerInfos(player);
         }
+        
+        // Request daily task data from world owner
+        this.getHost().getDailyTaskManager().requestDailyTaskData(player);
     }
 
     public synchronized void removePlayer(Player player) {

@@ -7,6 +7,7 @@ import emu.grasscutter.data.binout.config.ConfigEntityMonster;
 import emu.grasscutter.data.common.PropGrowCurve;
 import emu.grasscutter.data.excels.EnvAnimalGatherConfigData;
 import emu.grasscutter.data.excels.monster.*;
+import emu.grasscutter.game.dailytask.enums.DailyTaskFinishType;
 import emu.grasscutter.game.dungeons.enums.DungeonPassConditionType;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.props.*;
@@ -324,6 +325,11 @@ public class EntityMonster extends GameEntity {
                         p ->
                                 p.getQuestManager()
                                         .queueEvent(QuestContent.QUEST_CONTENT_CLEAR_GROUP_MONSTER, this.getGroupId()));
+
+        var dailyTaskManager = scene.getHost().getDailyTaskManager();
+        dailyTaskManager.triggerEvent(DailyTaskFinishType.DAILY_FINISH_MONSTER_NUM, this.getGroupId());
+        dailyTaskManager.triggerEvent(DailyTaskFinishType.DAILY_FINISH_MONSTER_ID_NUM, this.getGroupId(), this.getMonsterId());
+        dailyTaskManager.triggerEvent(DailyTaskFinishType.DAILY_FINISH_MONSTER_CONFIG_NUM, this.getGroupId(), this.getConfigId());
 
         SceneGroupInstance groupInstance =
                 scene.getScriptManager().getGroupInstanceById(this.getGroupId());

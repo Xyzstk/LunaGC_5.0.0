@@ -184,6 +184,10 @@ public final class GameData {
     @Getter private static final Int2ObjectMap<CityData> cityDataMap = new Int2ObjectOpenHashMap<>();
 
     @Getter
+    private static final Int2ObjectMap<CityTaskOpenData> cityTaskOpenDataMap =
+            new Int2ObjectOpenHashMap<>();
+
+    @Getter
     private static final Int2ObjectMap<CodexAnimalData> codexAnimalDataMap =
             new Int2ObjectOpenHashMap<>();
 
@@ -220,6 +224,18 @@ public final class GameData {
 
     @Getter
     private static final Int2ObjectMap<CoopPointData> coopPointDataMap =
+            new Int2ObjectOpenHashMap<>();
+
+    @Getter
+    private static final Int2ObjectMap<DailyTaskData> dailyTaskDataMap =
+            new Int2ObjectOpenHashMap<>();
+
+    @Getter
+    private static final Int2ObjectMap<DailyTaskLevelData> dailyTaskLevelDataMap =
+            new Int2ObjectOpenHashMap<>();
+
+    @Getter
+    private static final Int2ObjectMap<DailyTaskRewardData> dailyTaskRewardDataMap =
             new Int2ObjectOpenHashMap<>();
 
     @Getter

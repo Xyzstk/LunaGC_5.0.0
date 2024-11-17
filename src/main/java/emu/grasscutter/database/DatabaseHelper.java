@@ -11,6 +11,7 @@ import emu.grasscutter.game.activity.PlayerActivityData;
 import emu.grasscutter.game.activity.musicgame.MusicGameBeatmap;
 import emu.grasscutter.game.avatar.Avatar;
 import emu.grasscutter.game.battlepass.BattlePassManager;
+import emu.grasscutter.game.dailytask.DailyTaskManager;
 import emu.grasscutter.game.friends.Friendship;
 import emu.grasscutter.game.gacha.GachaRecord;
 import emu.grasscutter.game.home.GameHome;
@@ -488,6 +489,17 @@ public final class DatabaseHelper {
 
     public static void deleteQuest(GameMainQuest quest) {
         DatabaseHelper.asyncOperation(() -> DatabaseManager.getGameDatastore().delete(quest));
+    }
+
+    public static DailyTaskManager getDailyTasksByUid(int id) {
+        return DatabaseManager.getGameDatastore()
+                .find(DailyTaskManager.class)
+                .filter(Filters.eq("ownerUid", id))
+                .first();
+    }
+
+    public static void saveDailyTasks(DailyTaskManager dailyTaskManager) {
+        DatabaseHelper.saveGameAsync(dailyTaskManager);
     }
 
     public static GameHome getHomeByUid(int id) {

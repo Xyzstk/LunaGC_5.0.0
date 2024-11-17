@@ -1,6 +1,7 @@
 package emu.grasscutter.game.entity.gadget;
 
 import emu.grasscutter.Grasscutter;
+import emu.grasscutter.game.dailytask.enums.DailyTaskFinishType;
 import emu.grasscutter.game.drop.DropSystem;
 import emu.grasscutter.game.entity.EntityGadget;
 import emu.grasscutter.game.entity.gadget.chest.BossChestInteractHandler;
@@ -84,6 +85,9 @@ public class GadgetChest extends GadgetContent {
                     player.sendPacket(
                             new PacketWorldChestOpenNotify(
                                     getGadget().getGroupId(), player.getSceneId(), chest.config_id));
+                                    
+                    player.getDailyTaskManager()
+                            .triggerEvent(DailyTaskFinishType.DAILY_FINISH_CHEST_CONFIG, chest.group.id, chest.config_id);
                     return true;
                 }
                 // if failed,fallback to legacy drop system.
@@ -139,7 +143,9 @@ public class GadgetChest extends GadgetContent {
                             this.getGadget(),
                             InteractTypeOuterClass.InteractType.INTERACT_TYPE_OPEN_CHEST,
                             InterOpType.INTER_OP_TYPE_FINISH));
-
+                                    
+            player.getDailyTaskManager()
+                    .triggerEvent(DailyTaskFinishType.DAILY_FINISH_CHEST_CONFIG, getGadget().getGroupId(), getGadget().getConfigId());
             return true;
         }
     }

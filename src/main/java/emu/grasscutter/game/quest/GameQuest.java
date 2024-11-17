@@ -62,6 +62,9 @@ public class GameQuest {
         this.startTime = this.acceptTime;
         this.startGameDay = getOwner().getWorld().getTotalGameTimeDays();
         this.state = QuestState.QUEST_STATE_UNFINISHED;
+        
+        this.getMainQuest().setFinished(false);
+        this.getMainQuest().setState(ParentQuestState.PARENT_QUEST_STATE_NONE);
 
         val triggerCond =
                 questData.getFinishCond().stream()
@@ -104,6 +107,8 @@ public class GameQuest {
                 .getBeginExec()
                 .forEach(e -> getOwner().getServer().getQuestSystem().triggerExec(this, e, e.getParam()));
         this.getOwner().getQuestManager().checkQuestAlreadyFulfilled(this);
+
+        this.getOwner().getQuestManager().addOccupiedNpcList(this);
 
         if (DebugConstants.LOG_QUEST_START) {
             Grasscutter.getLogger().debug("Quest {} is started", subQuestId);
@@ -220,6 +225,8 @@ public class GameQuest {
 
         this.getOwner().sendPacket(new PacketQuestListUpdateNotify(this));
 
+        this.getOwner().getQuestManager().removeOccupiedNpcList(this);
+
         if (this.getQuestData().isFinishParent()) {
             // This quest finishes the questline - the main quest will also save the quest to db, so we
             // don't have to call save() here
@@ -257,6 +264,8 @@ public class GameQuest {
                                     ChapterData.getEndQuestChapterMap().get(subQuestId).getId(),
                                     ChapterStateOuterClass.ChapterState.CHAPTER_STATE_END));
         }
+
+        this.getOwner().getDailyTaskManager().onFinishQuest(this.subQuestId);
 
         // Give items for completing the quest.
         this.getQuestData()

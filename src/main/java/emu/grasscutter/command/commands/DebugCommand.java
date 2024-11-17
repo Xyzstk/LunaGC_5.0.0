@@ -3,7 +3,12 @@ package emu.grasscutter.command.commands;
 import emu.grasscutter.Grasscutter;
 import emu.grasscutter.command.*;
 import emu.grasscutter.game.player.Player;
+import emu.grasscutter.net.packet.BasePacket;
+import emu.grasscutter.net.packet.PacketOpcodes;
+import emu.grasscutter.net.proto.ScenePointUnlockNotifyOuterClass.ScenePointUnlockNotify;
+
 import java.util.List;
+import java.util.HexFormat;
 
 @Command(
         label = "debug",
@@ -13,7 +18,7 @@ import java.util.List;
 public final class DebugCommand implements CommandHandler {
     @Override
     public void execute(Player sender, Player targetPlayer, List<String> args) {
-        if (sender == null) return;
+        // if (sender == null) return;
 
         if (args.isEmpty()) {
             sender.dropMessage("No arguments provided. (check command for help)");
@@ -68,6 +73,58 @@ public final class DebugCommand implements CommandHandler {
                 }
 
                 sender.dropMessage("Check console for abilities.");
+            }
+            case "point" -> {
+                if (args.size() < 3) {
+                    sender.dropMessage("No arguments provided. (check command for help)");
+                    return;
+                }
+                subCommand = args.get(0);
+                int scene, point;
+                try {
+                    scene = Integer.parseInt(args.get(1));
+                    point = Integer.parseInt(args.get(2));
+                } catch (Exception e) {
+                    sender.dropMessage("Invalid argument.");
+                    return;
+                }
+                BasePacket packet = new BasePacket(PacketOpcodes.ScenePointUnlockNotify);
+                switch (subCommand) {
+                    case "unlock":
+                        targetPlayer.getUnlockedScenePoints(scene).add(point);
+                        packet.setData(ScenePointUnlockNotify.newBuilder().setSceneId(scene).addPointList(point));
+                        break;
+                    case "lock":
+                        targetPlayer.getUnlockedScenePoints(scene).remove(point);
+                        packet.setData(ScenePointUnlockNotify.newBuilder().setSceneId(scene).addLockedPointList(point));
+                        break;
+                    case "unhide":
+                        packet.setData(ScenePointUnlockNotify.newBuilder().setSceneId(scene).addUnhidePointList(point));
+                        break;
+                    case "hide":
+                        packet.setData(ScenePointUnlockNotify.newBuilder().setSceneId(scene).addHidePointList(point));
+                        break;
+                    default:
+                        sender.dropMessage("Invalid operation.");
+                        return;
+                }
+                targetPlayer.sendPacket(packet);
+            }
+            case "packet" -> {
+                if(args.isEmpty()) {
+                    sender.dropMessage("No arguments provided. (check command for help)");
+                    return;
+                }
+                try {
+                    BasePacket packet = new BasePacket(Integer.parseInt(args.get(0)));
+                    if(args.size() > 1) packet.setData(HexFormat.of().parseHex(args.get(1)));
+                    targetPlayer.sendPacket(packet);
+                } catch (Exception e) {
+                    sender.dropMessage("Invalid arguments.");
+                }
+            }
+            case "dailyrst" -> {
+                targetPlayer.getDailyTaskManager().resetDailyTasks();
             }
         }
     }

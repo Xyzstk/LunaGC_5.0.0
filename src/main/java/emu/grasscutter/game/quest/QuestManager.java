@@ -29,6 +29,8 @@ public final class QuestManager extends BasePlayerManager {
     @Getter private Int2ObjectMap<int[]> acceptProgressLists;
     @Getter private final List<Integer> loggedQuests;
 
+    @Getter private Map<Integer, Set<Integer>> occupiedNpcMap;
+
     private long lastHourCheck = 0;
     private long lastDayCheck = 0;
 
@@ -54,6 +56,7 @@ public final class QuestManager extends BasePlayerManager {
         this.mainQuests = new Int2ObjectOpenHashMap<>();
         this.loggedQuests = new ArrayList<>();
         this.acceptProgressLists = new Int2ObjectOpenHashMap<>();
+        this.occupiedNpcMap = new HashMap<>();
 
         if (DEBUG) {
             this.loggedQuests.addAll(
@@ -97,6 +100,34 @@ public final class QuestManager extends BasePlayerManager {
         return GAME_OPTIONS.questing.enabled;
     }
 
+    public boolean isNpcOccupied(int npcId, int questId) {
+        var occupiedList = this.occupiedNpcMap.get(npcId);
+        if(occupiedList == null) return false;
+
+        var questDataMap = GameData.getQuestDataMap();
+        for(int quest : occupiedList) {
+            // TODO
+            // the npc is only considered occupied if
+            // the distance between positions in the given quest and the matched quest
+            // is larger than CONST_VALUE_NPC_CONFLICT_DISTANCE
+            if(questDataMap.get(questId).getMainId() != questDataMap.get(quest).getMainId()) return true;
+        }
+        return false;
+    }
+
+    public void addOccupiedNpcList(GameQuest quest) {
+        var npcList = quest.getQuestData().getExclusiveNpcList();
+        if(npcList == null) return;
+        for(int npcId : npcList) {
+            var occupiedList = this.occupiedNpcMap.get(npcId);
+            if(occupiedList == null) {
+                occupiedList = new HashSet<>();
+                this.occupiedNpcMap.put(npcId, occupiedList);
+            }
+            occupiedList.add(quest.getQuestData().getId());
+        }
+    }
+
     /**
      * Attempts to add the giving action.
      *
@@ -135,6 +166,15 @@ public final class QuestManager extends BasePlayerManager {
         player.save();
 
         this.sendGivingRecords();
+    }
+
+    public void removeOccupiedNpcList(GameQuest quest) {
+        var npcList = quest.getQuestData().getExclusiveNpcList();
+        if(npcList == null) return;
+        for(int npcId : npcList) {
+            var occupiedList = this.occupiedNpcMap.get(npcId);
+            if(occupiedList != null) occupiedList.remove(quest.getQuestData().getId());
+        }
     }
 
     /**
@@ -237,11 +277,13 @@ public final class QuestManager extends BasePlayerManager {
                 getPlayer().getRotation().set(rewindPos.get(1));
             }
             if (activeQuest != null && rewindPos != null) {
-                // activeSubs.add(activeQuest);
+                activeSubs.addAll(activeQuest);
                 // player.sendPacket(new PacketQuestProgressUpdateNotify(activeQuest));
             }
             quest.checkProgress();
         }
+
+        activeSubs.forEach(q -> this.addOccupiedNpcList(q));
 
         if (this.player.getActivityManager() != null)
             this.player.getActivityManager().triggerActivityConditions();

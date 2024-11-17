@@ -11,6 +11,7 @@ import emu.grasscutter.game.battlepass.BattlePassSystem;
 import emu.grasscutter.game.chat.ChatSystem;
 import emu.grasscutter.game.chat.ChatSystemHandler;
 import emu.grasscutter.game.combine.CombineManger;
+import emu.grasscutter.game.dailytask.DailyTaskSystem;
 import emu.grasscutter.game.drop.DropSystem;
 import emu.grasscutter.game.drop.DropSystemLegacy;
 import emu.grasscutter.game.dungeons.DungeonSystem;
@@ -79,6 +80,7 @@ public final class GameServer extends KcpServer implements Iterable<Player> {
     private final AnnouncementSystem announcementSystem;
     private final QuestSystem questSystem;
     private final TalkSystem talkSystem;
+    private final DailyTaskSystem dailyTaskSystem;
 
     // Extra
     private final ServerTaskScheduler scheduler;
@@ -128,6 +130,7 @@ public final class GameServer extends KcpServer implements Iterable<Player> {
             this.announcementSystem = null;
             this.questSystem = null;
             this.talkSystem = null;
+            this.dailyTaskSystem = null;
             return;
         }
 
@@ -177,6 +180,7 @@ public final class GameServer extends KcpServer implements Iterable<Player> {
         this.announcementSystem = new AnnouncementSystem(this);
         this.questSystem = new QuestSystem(this);
         this.talkSystem = new TalkSystem(this);
+        this.dailyTaskSystem = new DailyTaskSystem(this);
 
         // Chata manager
         this.chatManager = new ChatSystem(this);

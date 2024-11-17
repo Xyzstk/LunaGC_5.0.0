@@ -3,6 +3,7 @@ package emu.grasscutter.game.entity.gadget;
 import emu.grasscutter.Grasscutter;
 import emu.grasscutter.data.GameData;
 import emu.grasscutter.data.excels.*;
+import emu.grasscutter.game.dailytask.enums.DailyTaskFinishType;
 import emu.grasscutter.game.entity.*;
 import emu.grasscutter.game.inventory.GameItem;
 import emu.grasscutter.game.player.Player;
@@ -69,6 +70,8 @@ public final class GadgetGatherObject extends GadgetContent {
                 .broadcastPacket(
                         new PacketGadgetInteractRsp(getGadget(), InteractType.INTERACT_TYPE_GATHER));
 
+        getGadget().getScene().getHost().getDailyTaskManager().triggerEvent(
+                DailyTaskFinishType.DAILY_FINISH_GATHER, getGadget().getGroupId(), getGadget().getPointType());
         return true;
     }
 
